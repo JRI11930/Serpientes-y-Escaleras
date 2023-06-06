@@ -54,5 +54,5 @@ int TirarDados(){
 }
 
 void Mover(){
-    
+
 }
