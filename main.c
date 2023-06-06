@@ -55,3 +55,6 @@ void MostrarTablero(Lista* tablero){
 
 
 }
+
+
+goolsalasdkmsamdk
