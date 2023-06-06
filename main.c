@@ -23,6 +23,8 @@
 //Encabezados de las funciones utilizadas ----------------------------------------------------------
 
 void MostrarTablero(Lista* tablero);
+int TirarDados();
+void Mover();
 
 //Programa Principal -------------------------------------------------------------------------------
 
@@ -44,17 +46,14 @@ int main(){
 //Definicion de las funciones utilizadas -----------------------------------------------------------
 
 void MostrarTablero(Lista* tablero){
-    NodoL* puntero = tablero->head;
-    for(int fila = 1; fila<=tamtab; fila++){ //i va a contar las filas
-        if(fila%2){
-            for(int j = tamtab; j>=0; j--){
-                
-            }
-        }
-    }
-
 
 }
 
+int TirarDados(){
 
-// Funcion Movimiento
+}
+
+void Mover(){
+
+}
+
