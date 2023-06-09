@@ -92,6 +92,11 @@ int TirarDados(){
 
 }
 
-void Mover(){
+//Funcion que mueve al jugador en el tablero--------------------------------------------------------
+
+void mover(){
 
 }
+
+//hola prueba
+//Buenos dias, tarde ya que barbaro
