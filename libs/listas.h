@@ -1,16 +1,14 @@
 
 typedef int element;
-#define ERROR '*';
+#define ERROR -1;
 
 typedef struct NodoL{
     element e;
     struct NodoL* siguiente;
-    struct NodoL* anterior;
 }NodoL;
 
 typedef struct Lista{
     NodoL* head;
-    NodoL* tail;
     int longitud;
 }Lista;
 
