@@ -15,6 +15,7 @@
 #include "libs/pilas.h"
 #include "libs/listas.h"
 #include <math.h>
+#include <conio.h>
 
 
 //Definición de constantes y variables globales ----------------------------------------------------
@@ -27,6 +28,7 @@ int J1 = 0, J2 = 50;
 void MostrarTablero(Lista* tablero);
 int TirarDados();
 void Mover();
+void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
 
@@ -38,6 +40,7 @@ int main(){
         InsertarFinal(camino, i);
     }
 
+    Inicio();
     MostrarTablero(camino);
 
     return 0;
@@ -46,46 +49,63 @@ int main(){
 //Definicion de las funciones utilizadas -----------------------------------------------------------
 
 void MostrarTablero(Lista* tablero){
-    printf("Mostrando tablero...\n");
+
+    system("cls");
+    printf("\n\n");
     for(int fila = 1; fila<=tamtab; fila++){
+        printf("\n\n\t\t\t\t\t");
         if(fila%2){
-            for(int columna = tamtab-1; columna >= 0; columna--){
+            for(int columna = tamtab-1; columna >= 0; columna--){   
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
                 if( celda == J1){
-                    printf("[ J1 ] ");
+                    printf("\033[0;31m");
+                    printf("[ J1 ]  ");
+                    printf("\033[0m");
                 }else if( celda == J2){
-                    printf("[ J2 ] ");
+                    printf("\033[1;34m");
+                    printf("[ J2 ]  ");
+                    printf("\033[0m");
                 }else{
                     if(celda / 10 < 1){
-                        printf("[ 0%d ] ", celda);
+                        printf("\033[0;32m");
+                        printf("[ 0%d ]  ", celda);
                     }else{
-                        printf("[ %d ] ", celda);
+                        printf("\033[0;32m");
+                        printf("[ %d ]  ", celda);
                     }
                 } 
             }
-            printf(" Fila: %d\n", fila);
+            printf("\n");
         }else{
             for(int columna = 0; columna < tamtab; columna++){
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
                 if(celda == J1){
-                    printf("[ J1 ] ");
+                    printf("\033[0;31m");
+                    printf("[ J1 ]  ");
+                    printf("\033[0m");
                 }else if(celda == J2){
-                    printf("[ J2 ] ");
+                    printf("\033[1;34m");
+                    printf("[ J2 ]  ");
+                    printf("\033[0m");
                 }else{
                     if(celda / 10 < 1){
-                        printf("[ 0%d ] ", celda);
+                        printf("\033[0;32m");
+                        printf("[ 0%d ]  ", celda);
                     }else{
-                        printf("[ %d ] ", celda);
+                        printf("\033[0;32m");
+                        printf("[ %d ]  ", celda);
                     }
                 }
             }
-            printf(" Fila: %d\n", fila);
+            printf("\n");
         }
     }
+    printf("\n\n");
+    printf("\033[0m");
 }
 
 int TirarDados(){
@@ -98,5 +118,41 @@ void mover(){
 
 }
 
-//hola prueba
-//Buenos dias, tarde ya que barbaro
+void Inicio(){
+
+    system("cls");
+    printf("\n\n\n\n");
+
+    printf("\033[1;32m");
+
+    printf("\t\t\t                                       ##                         ##                                      \n");
+    printf("\t\t\t                                                                  ##                                      \n");
+    printf("\t\t\t  #####    ####    ######   ######    ###      ####    #####     #####    ####     #####            ##  ##\n");
+    printf("\t\t\t ##       ##  ##    ##  ##   ##  ##    ##     ##  ##   ##  ##     ##     ##  ##   ##                ##  ##\n");
+    printf("\t\t\t  #####   ######    ##       ##  ##    ##     ######   ##  ##     ##     ######    #####            ##  ##\n");
+    printf("\t\t\t      ##  ##        ##       #####     ##     ##       ##  ##     ## ##  ##            ##            #####\n");
+    printf("\t\t\t ######    #####   ####      ##       ####     #####   ##  ##      ###    #####   ######                ##\n");
+    printf("\t\t\t                            ####                                                                    #####\n");
+
+
+    printf("\t\t\t\t\t                                     ###\n");
+    printf("\t\t\t\t\t                                      ##\n");
+    printf("\t\t\t\t\t ####     #####    ####     ####      ##      ####    ######    ####     #####\n");
+    printf("\t\t\t\t\t##  ##   ##       ##  ##       ##     ##     ##  ##    ##  ##      ##   ##\n");
+    printf("\t\t\t\t\t######    #####   ##        #####     ##     ######    ##       #####    #####\n");
+    printf("\t\t\t\t\t##            ##  ##  ##   ##  ##     ##     ##        ##      ##  ##        ##\n");
+    printf("\t\t\t\t\t #####   ######    ####     #####    ####     #####   ####      #####   ######\n");
+
+    printf("\n\n");
+
+    printf("\033[0m");
+
+    printf("\n\t\t\t\t\t\t\t\t   Pi%ca del Valle Jos%c", 164, 130);
+    printf("\n\t\t\t\t\t\t\t\tRam%crez Islas Jos%c Armando", 161, 130);
+    printf("\n\t\t\t\t\t\t\t\tReyes Camarillo Mar%ca Jos%c", 161, 130);
+
+    printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
+    getche();
+
+
+}
