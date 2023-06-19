@@ -1,5 +1,5 @@
 # Serpientes y Escaleras 🐍🪜
 
-### Práctica
+### Proyecto
 
-
+![](img/Portada.png)
