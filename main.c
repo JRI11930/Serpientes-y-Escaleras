@@ -15,6 +15,7 @@
 #include "libs/pilas.h"
 #include "libs/listas.h"
 #include <math.h>
+#include <time.h>
 #include <conio.h>
 
 
@@ -27,12 +28,15 @@ int J1 = 30, J2 = 30;
 
 void MostrarTablero(Lista* tablero);
 int TirarDados();
+void asignar_serpientes_escaleras(Lista* tablero, int num_serpientes, int num_escaleras);
 void mover(int jugador, int pasos, Lista* tablero);
 void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
 
 int main(){
+
+    system("color F3");
 
     Lista* camino = CrearLista();
 
@@ -88,6 +92,7 @@ void MostrarTablero(Lista* tablero){
             for(int columna = 0; columna < tamtab; columna++){
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
+
 
                 if(celda == J1 && celda == J2){
                     printf("\033[0;31m");
@@ -153,8 +158,6 @@ void Inicio(){
     system("cls");
     printf("\n\n\n\n");
 
-    printf("\033[1;32m");
-
     printf("\t\t\t                                       ##                         ##                                      \n");
     printf("\t\t\t                                                                  ##                                      \n");
     printf("\t\t\t  #####    ####    ######   ######    ###      ####    #####     #####    ####     #####            ##  ##\n");
@@ -188,9 +191,6 @@ void Inicio(){
 }
 
 //Funcion que asigna a las serpientes y escaleras
-
-
-
 //Funcion que muestre el ganador
 
 void ganador(){
