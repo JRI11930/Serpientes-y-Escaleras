@@ -73,7 +73,6 @@ void ShowP(Pila* pila){
     if(pila->head == NULL){
         return;
     }else{
-        int fila=1;
         Node* puntero = pila->head;
         while(puntero!=NULL){
 
