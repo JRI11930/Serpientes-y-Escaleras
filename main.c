@@ -179,7 +179,6 @@ void mover(int jugador, int pasos, Lista* tablero) {
 }
 
 
-
 void Inicio(){
 
     system("cls");
@@ -216,5 +215,15 @@ void Inicio(){
     printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
     getche();
 
+
+}
+
+//Funcion que asigna a las serpientes y escaleras
+
+
+
+//Funcion que muestre el ganador
+
+void ganador(){
 
 }
