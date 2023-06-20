@@ -16,6 +16,7 @@
 #include "libs/listas.h"
 #include <math.h>
 #include <conio.h>
+#include <string.h>
 
 
 //Definición de constantes y variables globales ----------------------------------------------------
@@ -40,8 +41,7 @@ int main(){
         InsertarFinal(camino, i);
     }
 
-    Inicio();
-    MostrarTablero(camino);
+    TirarDados();
 
     return 0;
 }
@@ -121,6 +121,37 @@ void MostrarTablero(Lista* tablero){
 
 int TirarDados(){
 
+    int random_num1,random_num2;
+
+    int previous_num1 = 0;
+    int previous_num2 = 0;
+    int sum = 0;
+
+    while (1) {
+        if (kbhit()){
+            char ch = getch();
+            if (ch == ' ') {
+                if (previous_num1 != 0 && previous_num2 != 0) {
+                        printf("\r");  // Regresar al principio de la línea
+                    for (int i = 0; i < 30; i++) {
+                        printf(" ");  // Espacios en blanco para borrar la línea anterior
+                    }
+                    printf("\r");  // Regresar al principio de la línea nuevamente
+                }
+                random_num1 = rand() % 6 + 1;  // Genera un entero aleatorio entre 1 y 6
+                random_num2 = rand() % 6 + 1;  // Genera otro entero aleatorio entre 1 y 6
+                printf("%d %d", random_num1, random_num2);
+                fflush(stdout);
+                previous_num1 = random_num1;
+                previous_num2 = random_num2;
+                sum = random_num1 + random_num2;
+            } else {
+                break;
+            }
+        }
+    }
+    printf("\nLa suma es: %d\n", sum);
+    return 0;
 }
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
