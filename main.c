@@ -186,3 +186,13 @@ void Inicio(){
 
 
 }
+
+//Funcion que asigna a las serpientes y escaleras
+
+
+
+//Funcion que muestre el ganador
+
+void ganador(){
+
+}
