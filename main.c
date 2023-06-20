@@ -27,7 +27,7 @@ int J1 = 30, J2 = 30;
 
 void MostrarTablero(Lista* tablero);
 int TirarDados();
-void Mover();
+void mover(int jugador, int pasos, Lista* tablero);
 void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
@@ -125,9 +125,12 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void Mover(){
+void mover(){
 
+    // Mostrar el tablero actualizado
+    MostrarTablero(tablero);
 }
+
 
 void Inicio(){
 
