@@ -148,7 +148,6 @@ void mover(int jugador, int pasos, Lista* tablero) {
 }
 
 
-
 void Inicio(){
 
     system("cls");
