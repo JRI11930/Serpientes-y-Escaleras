@@ -125,11 +125,28 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void mover(){
+void mover(int jugador, int pasos, Lista* tablero) {
+    int posicionActual = 0;
+    int nuevaPosicion = 0;
+
+    if (jugador == 1) {
+        posicionActual = J1;
+        nuevaPosicion = posicionActual + pasos;
+        if (nuevaPosicion <= 100) {
+            J1 = nuevaPosicion;
+        }
+    } else if (jugador == 2) {
+        posicionActual = J2;
+        nuevaPosicion = posicionActual + pasos;
+        if (nuevaPosicion <= 100) {
+            J2 = nuevaPosicion;
+        }
+    }
 
     // Mostrar el tablero actualizado
     MostrarTablero(tablero);
 }
+
 
 
 void Inicio(){
