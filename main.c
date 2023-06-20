@@ -21,7 +21,7 @@
 //Definición de constantes y variables globales ----------------------------------------------------
 
 #define tamtab 10   //El tablero será cuadrado
-int J1 = 0, J2 = 50;
+int J1 = 30, J2 = 30; 
 
 //Encabezados de las funciones utilizadas ----------------------------------------------------------
 
@@ -59,23 +59,29 @@ void MostrarTablero(Lista* tablero){
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
-                if( celda == J1){
+                    if(celda == J1 && celda == J2){
                     printf("\033[0;31m");
-                    printf("[ J1 ]  ");
+                    printf("[J1");
+                    printf("\033[1;34m");
+                    printf("J2]  ");
                     printf("\033[0m");
-                }else if( celda == J2){
+                }else if(celda == J1){
+                    printf("\033[0;31m");
+                    printf("[J1");
+                    printf("\033[0m");
+                }else if(celda == J2){
                     printf("\033[1;34m");
                     printf("[ J2 ]  ");
                     printf("\033[0m");
                 }else{
+                    printf("\033[0m");
                     if(celda / 10 < 1){
-                        printf("\033[0;32m");
                         printf("[ 0%d ]  ", celda);
                     }else{
-                        printf("\033[0;32m");
                         printf("[ %d ]  ", celda);
                     }
-                } 
+                }
+ 
             }
             printf("\n");
         }else{
@@ -83,20 +89,25 @@ void MostrarTablero(Lista* tablero){
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
-                if(celda == J1){
+                if(celda == J1 && celda == J2){
                     printf("\033[0;31m");
-                    printf("[ J1 ]  ");
+                    printf("[J1");
+                    printf("\033[1;34m");
+                    printf("J2]  ");
+                    printf("\033[0m");
+                }else if(celda == J1){
+                    printf("\033[0;31m");
+                    printf("[J1");
                     printf("\033[0m");
                 }else if(celda == J2){
                     printf("\033[1;34m");
                     printf("[ J2 ]  ");
                     printf("\033[0m");
                 }else{
+                    printf("\033[0m");
                     if(celda / 10 < 1){
-                        printf("\033[0;32m");
                         printf("[ 0%d ]  ", celda);
                     }else{
-                        printf("\033[0;32m");
                         printf("[ %d ]  ", celda);
                     }
                 }
@@ -114,7 +125,7 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void mover(){
+void Mover(){
 
 }
 
