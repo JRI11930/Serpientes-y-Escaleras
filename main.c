@@ -55,8 +55,8 @@ int main(){
     printf("La cabeza de la lista es:\t%d", camino->head->e);
     system("pause");
     //Creacion de escaleras
-    for(int i = 0; i < 5; i++){
-        int ini = (7*i+13);
+    for(int i = 0; i < 5; i++){;
+        int ini = 18*i+6;
         int fin = ini + 12;
     
         NodoL* puntero_ini = camino->head; 
@@ -66,22 +66,26 @@ int main(){
         }
     
         e[i].ini = puntero_ini;
-    
-        NodoL* puntero_fin = camino->head;
 
-        for(int i = 1; i <= fin; i++){
+        if(puntero_ini == NULL){
+            printf("Fallo en el puntero");
+            system("pause");
+        }    
+        NodoL* puntero_fin = puntero_ini;
+
+        for(int i = 1; i <= fin-ini; i++){
             puntero_fin = puntero_fin->siguiente;
         }
 
         e[i].fin = puntero_fin;
-        puntero_fin = puntero_ini = NULL;
+        
         
     }
     system("pause");
     //Creación de serpientes
     for(int i = 0; i < 5; i++){
-        int fin = (16*i+5);
-        int ini = fin + 15;
+        int fin = 15*i+4;
+        int ini = fin + 7;
     
         NodoL* puntero_fin = camino->head; 
     
@@ -105,6 +109,7 @@ int main(){
     Inicio();
     MostrarTablero(camino, e, s);
 
+    free(camino);
 
     return 0;
 }
@@ -211,7 +216,7 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[1].ini->e ||
                     celda == s[2].ini->e ||
                     celda == s[3].ini->e ||
-                    celda == s[3].ini->e 
+                    celda == s[4].ini->e 
                 ){
                     if(celda == s[0].ini->e){
                         printf("\x1b[33m");
@@ -344,7 +349,7 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == e[1].fin->e ||
                     celda == e[2].fin->e ||
                     celda == e[3].fin->e ||
-                    celda == e[3].fin->e 
+                    celda == e[4].fin->e 
                 ){
                   if(celda == e[0].fin->e){
                         printf("\x1b[32m");
@@ -377,7 +382,7 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[1].ini->e ||
                     celda == s[2].ini->e ||
                     celda == s[3].ini->e ||
-                    celda == s[3].ini->e 
+                    celda == s[4].ini->e 
                 ){
                     if(celda == s[0].ini->e){
                         printf("\x1b[33m");
@@ -410,7 +415,7 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[1].fin->e ||
                     celda == s[2].fin->e ||
                     celda == s[3].fin->e ||
-                    celda == s[3].fin->e 
+                    celda == s[4].fin->e 
                 ){
                     if(celda == s[0].fin->e){
                         printf("\x1b[33m");
