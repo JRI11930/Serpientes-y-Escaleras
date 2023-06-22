@@ -17,38 +17,101 @@
 #include <math.h>
 #include <conio.h>
 #include <string.h>
+#include <time.h>
 
 
 //Definición de constantes y variables globales ----------------------------------------------------
 
+typedef struct Move{
+    NodoL* ini;
+    NodoL* fin;
+}Move;
+
+
 #define tamtab 10   //El tablero será cuadrado
-int J1 = 30, J2 = 30; 
+int J1 = 0, J2 = 0; 
 
 //Encabezados de las funciones utilizadas ----------------------------------------------------------
 
-void MostrarTablero(Lista* tablero);
+void MostrarTablero(Lista* tablero, Move e[], Move s[]);
 int TirarDados();
-void mover(int jugador, int pasos, Lista* tablero);
+void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]);
 void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
 
 int main(){
 
+    srand(time(NULL));
+
     Lista* camino = CrearLista();
+    Move s[5];
+    Move e[5];
 
     for (int i = 0; i < 100; i++){
         InsertarFinal(camino, i);
     }
 
-    TirarDados();
+    printf("La cabeza de la lista es:\t%d", camino->head->e);
+    system("pause");
+    //Creacion de escaleras
+    for(int i = 0; i < 5; i++){
+        int ini = (7*i+13);
+        int fin = ini + 12;
+    
+        NodoL* puntero_ini = camino->head; 
+    
+        for(int i = 1; i <= ini; i++){
+            puntero_ini = puntero_ini->siguiente;
+        }
+    
+        e[i].ini = puntero_ini;
+    
+        NodoL* puntero_fin = camino->head;
+
+        for(int i = 1; i <= fin; i++){
+            puntero_fin = puntero_fin->siguiente;
+        }
+
+        e[i].fin = puntero_fin;
+        puntero_fin = puntero_ini = NULL;
+        
+    }
+    system("pause");
+    //Creación de serpientes
+    for(int i = 0; i < 5; i++){
+        int fin = (16*i+5);
+        int ini = fin + 15;
+    
+        NodoL* puntero_fin = camino->head; 
+    
+        for(int i = 1; i <= fin; i++){
+            puntero_fin = puntero_fin->siguiente;
+        }
+    
+        s[i].fin = puntero_fin;
+    
+        NodoL* puntero_ini = camino->head;
+
+        for(int i = 1; i <= ini; i++){
+            puntero_ini = puntero_ini->siguiente;
+        }
+
+        s[i].ini = puntero_ini;
+        puntero_fin = puntero_ini = NULL;
+        
+    }
+
+    Inicio();
+    MostrarTablero(camino, e, s);
+
 
     return 0;
 }
 
 //Definicion de las funciones utilizadas -----------------------------------------------------------
 
-void MostrarTablero(Lista* tablero){
+void MostrarTablero(Lista* tablero, Move *e, Move *s){
 
     system("cls");
     printf("\n\n");
@@ -59,20 +122,157 @@ void MostrarTablero(Lista* tablero){
 
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
-                    if(celda == J1 && celda == J2){
-                    printf("\033[0;31m");
+                if(celda == J1 && celda == J2){
+                    printf("\x1b[45m");
                     printf("[J1");
-                    printf("\033[1;34m");
-                    printf("J2]  ");
-                    printf("\033[0m");
+                    printf("\x1b[44m");
+                    printf("J2]");
+                    printf("\x1b[0m");
+                    printf("  ");
                 }else if(celda == J1){
-                    printf("\033[0;31m");
-                    printf("[J1");
-                    printf("\033[0m");
+                    printf("\x1b[45m");
+                    printf("[ J1 ]");
+                    printf("\x1b[0m");
+                    printf("  ");
                 }else if(celda == J2){
-                    printf("\033[1;34m");
-                    printf("[ J2 ]  ");
-                    printf("\033[0m");
+                    printf("\x1b[34m");
+                    printf("[ J2 ]");
+                    printf("\x1b[0m");
+                    printf("  ");
+                }else if(
+                    celda == e[0].ini->e ||
+                    celda == e[1].ini->e ||
+                    celda == e[2].ini->e ||
+                    celda == e[3].ini->e ||
+                    celda == e[4].ini->e 
+                    
+                ){
+                    if(celda == e[0].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e0 ]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == e[1].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e1 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[2].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e2 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[3].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e3 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[4].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e4 ]");
+                        printf("\x1b[0m");
+                        printf("  "); 
+                    }
+                }else if(
+                    celda == e[0].fin->e ||
+                    celda == e[1].fin->e ||
+                    celda == e[2].fin->e ||
+                    celda == e[3].fin->e ||
+                    celda == e[4].fin->e 
+                ){
+                  if(celda == e[0].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e0f]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == e[1].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e1f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[2].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e2f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[3].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e3f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[4].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e4f]");
+                        printf("\x1b[0m");
+                        printf("  ");    
+                    }
+                }else if(
+                    celda == s[0].ini->e ||
+                    celda == s[1].ini->e ||
+                    celda == s[2].ini->e ||
+                    celda == s[3].ini->e ||
+                    celda == s[3].ini->e 
+                ){
+                    if(celda == s[0].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s0 ]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == s[1].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s1 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[2].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s2 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[3].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s3 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[4].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s4 ]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }
+                }else if(
+                    celda == s[0].fin->e ||
+                    celda == s[1].fin->e ||
+                    celda == s[2].fin->e ||
+                    celda == s[3].fin->e ||
+                    celda == s[4].fin->e
+                ){
+                    if(celda == s[0].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s0f]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == s[1].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s1f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[2].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s2f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[3].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s3f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[4].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s4f]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }
+                
                 }else{
                     printf("\033[0m");
                     if(celda / 10 < 1){
@@ -81,7 +281,7 @@ void MostrarTablero(Lista* tablero){
                         printf("[ %d ]  ", celda);
                     }
                 }
- 
+            
             }
             printf("\n");
         }else{
@@ -90,19 +290,154 @@ void MostrarTablero(Lista* tablero){
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
                 if(celda == J1 && celda == J2){
-                    printf("\033[0;31m");
+                    printf("\x1b[45m");
                     printf("[J1");
-                    printf("\033[1;34m");
-                    printf("J2]  ");
-                    printf("\033[0m");
+                    printf("\x1b[44m");
+                    printf("J2]");
+                    printf("\x1b[0m");
+                    printf("  ");
                 }else if(celda == J1){
-                    printf("\033[0;31m");
-                    printf("[J1");
-                    printf("\033[0m");
+                    printf("\x1b[45m");
+                    printf("[ J1 ]");
+                    printf("\x1b[0m");
+                    printf("  ");
                 }else if(celda == J2){
-                    printf("\033[1;34m");
-                    printf("[ J2 ]  ");
-                    printf("\033[0m");
+                    printf("\x1b[44m");
+                    printf("[ J2 ]");
+                    printf("\x1b[0m");
+                    printf("  ");
+                }else if(
+                    celda == e[0].ini->e ||
+                    celda == e[1].ini->e ||
+                    celda == e[2].ini->e ||
+                    celda == e[3].ini->e ||
+                    celda == e[4].ini->e
+                ){
+                    if(celda == e[0].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e0 ]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == e[1].ini->e){
+                    printf("\x1b[32m");
+                        printf("[ e1 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[2].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e2 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[3].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e3 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[4].ini->e){
+                        printf("\x1b[32m");
+                        printf("[ e4 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }
+                }else if(
+                    celda == e[0].fin->e ||
+                    celda == e[1].fin->e ||
+                    celda == e[2].fin->e ||
+                    celda == e[3].fin->e ||
+                    celda == e[3].fin->e 
+                ){
+                  if(celda == e[0].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e0f]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == e[1].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e1f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[2].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e2f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[3].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e3f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == e[4].fin->e){
+                        printf("\x1b[32m");
+                        printf("[ e4f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }
+                }else if(
+                    celda == s[0].ini->e ||
+                    celda == s[1].ini->e ||
+                    celda == s[2].ini->e ||
+                    celda == s[3].ini->e ||
+                    celda == s[3].ini->e 
+                ){
+                    if(celda == s[0].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s0 ]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == s[1].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s1 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[2].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s2 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[3].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s3 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[4].ini->e){
+                        printf("\x1b[33m");
+                        printf("[ s4 ]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }
+                }else if(
+                    celda == s[0].fin->e ||
+                    celda == s[1].fin->e ||
+                    celda == s[2].fin->e ||
+                    celda == s[3].fin->e ||
+                    celda == s[3].fin->e 
+                ){
+                    if(celda == s[0].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s0f]");
+                        printf("\x1b[0m");
+                        printf("  ");
+                    }else if(celda == s[1].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s1f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[2].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s2f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[3].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s3f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }else if(celda == s[4].fin->e){
+                        printf("\x1b[33m");
+                        printf("[ s4f]");
+                        printf("\x1b[0m");
+                        printf("  ");   
+                    }
                 }else{
                     printf("\033[0m");
                     if(celda / 10 < 1){
@@ -156,7 +491,7 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void mover(int jugador, int pasos, Lista* tablero) {
+void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]){
     int posicionActual = 0;
     int nuevaPosicion = 0;
 
@@ -175,7 +510,7 @@ void mover(int jugador, int pasos, Lista* tablero) {
     }
 
     // Mostrar el tablero actualizado
-    MostrarTablero(tablero);
+    MostrarTablero(tablero, e, s);
 }
 
 
