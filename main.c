@@ -36,6 +36,7 @@ int J1 = 0, J2 = 0;
 void MostrarTablero(Lista* tablero, Move e[], Move s[]);
 int TirarDados();
 void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]);
+void Jugar(Lista* tablero, Move *e, Move *s);
 void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
@@ -52,8 +53,6 @@ int main(){
         InsertarFinal(camino, i);
     }
 
-    printf("La cabeza de la lista es:\t%d", camino->head->e);
-    system("pause");
     //Creacion de escaleras
     for(int i = 0; i < 5; i++){;
         int ini = 18*i+6;
@@ -107,7 +106,7 @@ int main(){
     }
 
     Inicio();
-    MostrarTablero(camino, e, s);
+    Jugar(camino, e, s);
 
     free(camino);
 
@@ -140,7 +139,7 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     printf("\x1b[0m");
                     printf("  ");
                 }else if(celda == J2){
-                    printf("\x1b[34m");
+                    printf("\x1b[44m");
                     printf("[ J2 ]");
                     printf("\x1b[0m");
                     printf("  ");
@@ -463,15 +462,15 @@ int TirarDados(){
 
     int random_num1,random_num2;
 
-    int previous_num1 = 0;
-    int previous_num2 = 0;
-    int sum = 0;
+    int num_anterior1 = 0;
+    int num_anterior2 = 0;
+    int suma = 0;
 
     while (1) {
         if (kbhit()){
             char ch = getch();
             if (ch == ' ') {
-                if (previous_num1 != 0 && previous_num2 != 0) {
+                if (num_anterior1 != 0 && num_anterior2 != 0) {
                         printf("\r");  // Regresar al principio de la línea
                     for (int i = 0; i < 30; i++) {
                         printf(" ");  // Espacios en blanco para borrar la línea anterior
@@ -482,16 +481,15 @@ int TirarDados(){
                 random_num2 = rand() % 6 + 1;  // Genera otro entero aleatorio entre 1 y 6
                 printf("%d %d", random_num1, random_num2);
                 fflush(stdout);
-                previous_num1 = random_num1;
-                previous_num2 = random_num2;
-                sum = random_num1 + random_num2;
+                num_anterior1 = random_num1;
+                num_anterior2 = random_num2;
+                suma = random_num1 + random_num2;
             } else {
                 break;
             }
         }
     }
-    printf("\nLa suma es: %d\n", sum);
-    return 0;
+    return suma;
 }
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
@@ -518,6 +516,28 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]){
     MostrarTablero(tablero, e, s);
 }
 
+
+void Jugar(Lista* tablero, Move *e, Move *s){
+    int i = 1; 
+    while(J1<99 && J2<99){
+        MostrarTablero(tablero, e, s);
+        if(i%2){
+            printf("Turno de J1\n");
+            mover(1, TirarDados(), tablero, e, s);
+        }else{
+            printf("Turno de J2\n");
+            mover(2, TirarDados(), tablero, e, s);
+        }
+        i++;
+    }
+    system("cls");
+    if(J1 >=99){
+        printf("Gano J1");
+    }else{
+        printf("Gano J2");
+    }
+
+}   
 
 void Inicio(){
 
@@ -557,10 +577,6 @@ void Inicio(){
 
 
 }
-
-//Funcion que asigna a las serpientes y escaleras
-
-
 
 //Funcion que muestre el ganador
 
