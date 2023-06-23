@@ -84,7 +84,6 @@ int main(){
         
         
     }
-    system("pause");
     //Creación de serpientes
     for(int i = 0; i < 5; i++){
         int fin = 15*i+4;
@@ -386,12 +385,12 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
             // Verificar si el jugador ha caído en una escalera o serpiente
             for (i = 0; i < 5; i++) {
                 if (nuevaPosicion == e[i].ini->e) {
-                    printf("Jugador 1 ha subido por una escalera. Avanzar%c a la posici%cn %d\n", 160, 160, e[i].fin->e);
+                    printf("\nJugador 1 ha subido por una escalera. Avanzar%c a la posici%cn %d\n", 160, 160, e[i].fin->e);
                     system("pause");
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("Jugador 1 ha caído por una serpiente. Retroceder%c a la posici%cn %d\n",160, 162, s[i].fin->e);
+                    printf("\nJugador 1 ha caído por una serpiente. Retroceder%c a la posici%cn %d\n",160, 162, s[i].fin->e);
                     system("pause");
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
@@ -505,7 +504,7 @@ void Inicio(){
 
     printf("\n\t\t\t\t\t\t\t\t   Pi%ca del Valle Jos%c", 164, 130);
     printf("\n\t\t\t\t\t\t\t\tRam%crez Islas Jos%c Armando", 161, 130);
-    printf("\n\t\t\t\t\t\t\t\tReyes Camarillo Mar%ca Jos%c", 161, 130);
+    printf("\n\t\t\t\t\t\t\t\tMondrag%cn Aguilar V%cctor Hugo", 162, 161);
 
     printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
     getche();
