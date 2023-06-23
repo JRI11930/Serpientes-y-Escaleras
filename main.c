@@ -425,8 +425,6 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
     MostrarTablero(tablero, e, s);
 }
 
-
-
 void Jugar(Lista* tablero, Move *e, Move *s){
     int i = 1; 
     while(J1<99 && J2<99){
