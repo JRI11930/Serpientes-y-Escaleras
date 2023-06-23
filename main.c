@@ -386,11 +386,13 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
             // Verificar si el jugador ha caído en una escalera o serpiente
             for (i = 0; i < 5; i++) {
                 if (nuevaPosicion == e[i].ini->e) {
-                    printf("Jugador 1 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
+                    printf("Jugador 1 ha subido por una escalera. Avanzar%c a la posici%cn %d\n", 160, 160, e[i].fin->e);
+                    system("pause");
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("Jugador 1 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
+                    printf("Jugador 1 ha caído por una serpiente. Retroceder%c a la posici%cn %d\n",160, 162, s[i].fin->e);
+                    system("pause");
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
                 }
@@ -438,23 +440,35 @@ void Jugar(Lista* tablero, Move *e, Move *s){
             mover(2, TirarDados(), tablero, e, s);
         }
         i++;
+
+        if(J1 == 98 && J2 == 98){
+            printf("\n\tEmpate :)");
+            return;
+        }
     }
     system("cls");
-    if(J1 >=99){
-        printf("Gano J1");
-    }else{
-        printf("Gano J2");
-    }
+    
+    JGanadore(J1, J2);
 
 }   
 
 void JGanadore(int J1, int J2){
 
-	if(J1>=99){
-		printf(J1C "Jugador 1 gana \n\x1b[0m");
+	if(J1==99){
+        printf("\n");
+        printf(J1C);
+        printf("\t\t                \n");
+		printf("\t\t Jugador 1 gana \n");
+        printf("\t\t                \n");
+        printf("\x1b[0m");
 	}
-	else if(J2>=99){
-		printf("\x1b[36m Jugador 2 gana \n\x1b[0m");
+	else{
+        printf("\n");
+        printf(J2C);
+        printf("\t\t                \n");
+		printf("\t\t Jugador 2 gana \n");
+        printf("\t\t                \n");
+        printf("\x1b[0m");
 	}	
 
 }
@@ -462,9 +476,10 @@ void JGanadore(int J1, int J2){
 void Inicio(){
 
     system("cls");
-    printf("\n\n\n\n");
 
     printf("\033[1;32m");
+
+    printf("\n\n\n\n");
 
     printf("\t\t\t                                       ##                         ##                                      \n");
     printf("\t\t\t                                                                  ##                                      \n");
