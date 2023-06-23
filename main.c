@@ -493,7 +493,7 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void Mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
+void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
     NodoL* nodo_actual;
     int posicion_actual;
     int posicion_nueva;
