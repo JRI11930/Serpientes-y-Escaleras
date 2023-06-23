@@ -506,11 +506,11 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
             // Verificar si el jugador ha caído en una escalera o serpiente
             for (i = 0; i < 5; i++) {
                 if (nuevaPosicion == e[i].ini->e) {
-                    printf("Jugador 1 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
+                    printf("Jugador 1 ha subido por una escalera. Avanzara a la posición %d\n", e[i].fin->e);
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("Jugador 1 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
+                    printf("Jugador 1 ha caído por una serpiente. Retrocedera a la posición %d\n", s[i].fin->e);
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
                 }
@@ -526,11 +526,11 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
             // Verificar si el jugador ha caído en una escalera o serpiente
             for (i = 0; i < 5; i++) {
                 if (nuevaPosicion == e[i].ini->e) {
-                    printf("Jugador 2 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
+                    printf("Jugador 2 ha subido por una escalera. Avanzara a la posición %d\n", e[i].fin->e);
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("Jugador 2 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
+                    printf("Jugador 2 ha caído por una serpiente. Retrocedera a la posición %d\n", s[i].fin->e);
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
                 }
@@ -551,10 +551,10 @@ void Jugar(Lista* tablero, Move *e, Move *s){
     while(J1<99 && J2<99){
         MostrarTablero(tablero, e, s);
         if(i%2){
-            printf("Turno de J1\n");
+            printf("Turno de J1, presione espacio para lanzar el dado\n");
             mover(1, TirarDados(), tablero, e, s);
         }else{
-            printf("Turno de J2\n");
+            printf("Turno de J2, presione espacio para lanzar el dado\n");
             mover(2, TirarDados(), tablero, e, s);
         }
         i++;
@@ -600,6 +600,7 @@ void Inicio(){
     printf("\n\t\t\t\t\t\t\t\t   Pi%ca del Valle Jos%c", 164, 130);
     printf("\n\t\t\t\t\t\t\t\tRam%crez Islas Jos%c Armando", 161, 130);
     printf("\n\t\t\t\t\t\t\t\tReyes Camarillo Mar%ca Jos%c", 161, 130);
+    printf("\n\t\t\t\t\t\t\t\tMondrag%cn Aguilar Victor Hugo", 161, 130);
 
     printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
     getche();
