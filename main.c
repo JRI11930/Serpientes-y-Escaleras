@@ -29,6 +29,9 @@ typedef struct Move{
 
 
 #define tamtab 10   //El tablero será cuadrado
+#define J1C "\x1b[46m" //Color CYAN
+#define J2C "\x1b[44m" //Color AZUL
+
 int J1 = 0, J2 = 0; 
 
 //Encabezados de las funciones utilizadas ----------------------------------------------------------
@@ -37,6 +40,7 @@ void MostrarTablero(Lista* tablero, Move e[], Move s[]);
 int TirarDados();
 void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]);
 void Jugar(Lista* tablero, Move *e, Move *s);
+void JGanadore(int J1, int J2);
 void Inicio();
 
 //Programa Principal -------------------------------------------------------------------------------
@@ -127,19 +131,19 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
                 if(celda == J1 && celda == J2){
-                    printf("\x1b[45m");
+                    printf(J1C);
                     printf("[J1");
-                    printf("\x1b[44m");
+                    printf(J2C);
                     printf("J2]");
                     printf("\x1b[0m");
                     printf("  ");
                 }else if(celda == J1){
-                    printf("\x1b[45m");
+                    printf(J1C);
                     printf("[ J1 ]");
                     printf("\x1b[0m");
                     printf("  ");
                 }else if(celda == J2){
-                    printf("\x1b[44m");
+                    printf(J2C);
                     printf("[ J2 ]");
                     printf("\x1b[0m");
                     printf("  ");
@@ -151,32 +155,18 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == e[4].ini->e 
                     
                 ){
-                    if(celda == e[0].ini->e){
+
+                    for(int i = 0; i < 5; i++){
+                        if(celda == e[i].ini->e){
                         printf("\x1b[32m");
-                        printf("[ e0 ]");
+                        printf("[ e%d ]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == e[1].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e1 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[2].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e2 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[3].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e3 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[4].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e4 ]");
-                        printf("\x1b[0m");
-                        printf("  "); 
+                        }else{
+                            continue;
+                        }
                     }
+
                 }else if(
                     celda == e[0].fin->e ||
                     celda == e[1].fin->e ||
@@ -184,32 +174,18 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == e[3].fin->e ||
                     celda == e[4].fin->e 
                 ){
-                  if(celda == e[0].fin->e){
+
+                    for(int i = 0; i < 5; i++){
+                        if(celda == e[i].fin->e){
                         printf("\x1b[32m");
-                        printf("[ e0f]");
+                        printf("[ e%df]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == e[1].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e1f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[2].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e2f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[3].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e3f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[4].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e4f]");
-                        printf("\x1b[0m");
-                        printf("  ");    
+                        }else{
+                            continue;
+                        }
                     }
+
                 }else if(
                     celda == s[0].ini->e ||
                     celda == s[1].ini->e ||
@@ -217,31 +193,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[3].ini->e ||
                     celda == s[4].ini->e 
                 ){
-                    if(celda == s[0].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s0 ]");
+                    for(int i = 0; i < 5; i++){
+                        if(celda == s[i].ini->e){
+                        printf("\x1b[31m");
+                        printf("[ s%d ]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == s[1].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s1 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[2].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s2 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[3].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s3 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[4].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s4 ]");
-                        printf("\x1b[0m");
-                        printf("  ");
+                        }else{
+                            continue;
+                        }
                     }
                 }else if(
                     celda == s[0].fin->e ||
@@ -250,31 +210,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[3].fin->e ||
                     celda == s[4].fin->e
                 ){
-                    if(celda == s[0].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s0f]");
+                    for(int i = 0; i < 5; i++){
+                        if(celda == s[i].fin->e){
+                        printf("\x1b[31m");
+                        printf("[ s%df]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == s[1].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s1f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[2].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s2f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[3].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s3f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[4].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s4f]");
-                        printf("\x1b[0m");
-                        printf("  ");
+                        }else{
+                            continue;
+                        }
                     }
                 
                 }else{
@@ -294,19 +238,19 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                 int celda = Obtener(pow(tamtab, 2)-(fila*tamtab)+columna, tablero);
 
                 if(celda == J1 && celda == J2){
-                    printf("\x1b[45m");
+                    printf(J1C);
                     printf("[J1");
-                    printf("\x1b[44m");
+                    printf(J2C);
                     printf("J2]");
                     printf("\x1b[0m");
                     printf("  ");
                 }else if(celda == J1){
-                    printf("\x1b[45m");
+                    printf(J1C);
                     printf("[ J1 ]");
                     printf("\x1b[0m");
                     printf("  ");
                 }else if(celda == J2){
-                    printf("\x1b[44m");
+                    printf(J2C);
                     printf("[ J2 ]");
                     printf("\x1b[0m");
                     printf("  ");
@@ -317,31 +261,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == e[3].ini->e ||
                     celda == e[4].ini->e
                 ){
-                    if(celda == e[0].ini->e){
+                    for(int i = 0; i < 5; i++){
+                        if(celda == e[i].ini->e){
                         printf("\x1b[32m");
-                        printf("[ e0 ]");
+                        printf("[ e%d ]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == e[1].ini->e){
-                    printf("\x1b[32m");
-                        printf("[ e1 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[2].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e2 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[3].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e3 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[4].ini->e){
-                        printf("\x1b[32m");
-                        printf("[ e4 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
+                        }else{
+                            continue;
+                        }
                     }
                 }else if(
                     celda == e[0].fin->e ||
@@ -350,31 +278,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == e[3].fin->e ||
                     celda == e[4].fin->e 
                 ){
-                  if(celda == e[0].fin->e){
+                    for(int i = 0; i < 5; i++){
+                        if(celda == e[i].fin->e){
                         printf("\x1b[32m");
-                        printf("[ e0f]");
+                        printf("[ e%d ]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == e[1].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e1f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[2].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e2f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[3].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e3f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == e[4].fin->e){
-                        printf("\x1b[32m");
-                        printf("[ e4f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
+                        }else{
+                            continue;
+                        }
                     }
                 }else if(
                     celda == s[0].ini->e ||
@@ -383,31 +295,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[3].ini->e ||
                     celda == s[4].ini->e 
                 ){
-                    if(celda == s[0].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s0 ]");
+                    for(int i = 0; i < 5; i++){
+                        if(celda == s[i].ini->e){
+                        printf("\x1b[31m");
+                        printf("[ s%d ]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == s[1].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s1 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[2].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s2 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[3].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s3 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[4].ini->e){
-                        printf("\x1b[33m");
-                        printf("[ s4 ]");
-                        printf("\x1b[0m");
-                        printf("  ");   
+                        }else{
+                            continue;
+                        }
                     }
                 }else if(
                     celda == s[0].fin->e ||
@@ -416,31 +312,15 @@ void MostrarTablero(Lista* tablero, Move *e, Move *s){
                     celda == s[3].fin->e ||
                     celda == s[4].fin->e 
                 ){
-                    if(celda == s[0].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s0f]");
+                    for(int i = 0; i < 5; i++){
+                        if(celda == s[i].fin->e){
+                        printf("\x1b[31m");
+                        printf("[ s%df]", i);
                         printf("\x1b[0m");
                         printf("  ");
-                    }else if(celda == s[1].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s1f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[2].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s2f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[3].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s3f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
-                    }else if(celda == s[4].fin->e){
-                        printf("\x1b[33m");
-                        printf("[ s4f]");
-                        printf("\x1b[0m");
-                        printf("  ");   
+                        }else{
+                            continue;
+                        }
                     }
                 }else{
                     printf("\033[0m");
@@ -506,11 +386,11 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
             // Verificar si el jugador ha caído en una escalera o serpiente
             for (i = 0; i < 5; i++) {
                 if (nuevaPosicion == e[i].ini->e) {
-                    printf("Jugador 1 ha subido por una escalera. Avanzara a la posición %d\n", e[i].fin->e);
+                    printf("Jugador 1 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("Jugador 1 ha caído por una serpiente. Retrocedera a la posición %d\n", s[i].fin->e);
+                    printf("Jugador 1 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
                 }
@@ -558,22 +438,46 @@ void Jugar(Lista* tablero, Move *e, Move *s){
             mover(2, TirarDados(), tablero, e, s);
         }
         i++;
+
+        if(J1 == 98 && J2 == 98){
+            printf("\n\tEmpate :)");
+            return;
+        }
     }
     system("cls");
-    if(J1 >=99){
-        printf("Gano J1");
-    }else{
-        printf("Gano J2");
-    }
+    
+    JGanadore(J1, J2);
 
 }   
+
+void JGanadore(int J1, int J2){
+
+	if(J1==99){
+        printf("\n");
+        printf(J1C);
+        printf("\t\t                \n");
+		printf("\t\t Jugador 1 gana \n");
+        printf("\t\t                \n");
+        printf("\x1b[0m");
+	}
+	else{
+        printf("\n");
+        printf(J2C);
+        printf("\t\t                \n");
+		printf("\t\t Jugador 2 gana \n");
+        printf("\t\t                \n");
+        printf("\x1b[0m");
+	}	
+
+}
 
 void Inicio(){
 
     system("cls");
-    printf("\n\n\n\n");
 
     printf("\033[1;32m");
+
+    printf("\n\n\n\n");
 
     printf("\t\t\t                                       ##                         ##                                      \n");
     printf("\t\t\t                                                                  ##                                      \n");
@@ -597,7 +501,7 @@ void Inicio(){
 
     printf("\033[0m");
 
-    printf("\n\t\t\t\t\t\t\t\t   Pi%ca del Valle Jos%c", 164, 130);
+    printf("\n\t\t\t\t\t\t\t\tPi%ca del Valle Jos%c", 164, 130);
     printf("\n\t\t\t\t\t\t\t\tRam%crez Islas Jos%c Armando", 161, 130);
     printf("\n\t\t\t\t\t\t\t\tReyes Camarillo Mar%ca Jos%c", 161, 130);
     printf("\n\t\t\t\t\t\t\t\tMondrag%cn Aguilar Victor Hugo", 161, 130);
