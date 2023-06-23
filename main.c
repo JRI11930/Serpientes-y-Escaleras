@@ -493,28 +493,57 @@ int TirarDados(){
 }
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
-
-void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]){
+void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
     int posicionActual = 0;
     int nuevaPosicion = 0;
+    int i;
 
     if (jugador == 1) {
         posicionActual = J1;
         nuevaPosicion = posicionActual + pasos;
+
         if (nuevaPosicion <= 100) {
-            J1 = nuevaPosicion;
+            // Verificar si el jugador ha caído en una escalera o serpiente
+            for (i = 0; i < 5; i++) {
+                if (nuevaPosicion == e[i].ini->e) {
+                    printf("Jugador 1 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
+                    nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
+                    break;
+                } else if (nuevaPosicion == s[i].ini->e) {
+                    printf("Jugador 1 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
+                    nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
+                    break;
+                }
+            }
+            
+            J1 = nuevaPosicion; // Actualizar la posición del jugador 1 en el tablero
         }
     } else if (jugador == 2) {
         posicionActual = J2;
         nuevaPosicion = posicionActual + pasos;
+
         if (nuevaPosicion <= 100) {
-            J2 = nuevaPosicion;
+            // Verificar si el jugador ha caído en una escalera o serpiente
+            for (i = 0; i < 5; i++) {
+                if (nuevaPosicion == e[i].ini->e) {
+                    printf("Jugador 2 ha subido por una escalera. Avanzará a la posición %d\n", e[i].fin->e);
+                    nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
+                    break;
+                } else if (nuevaPosicion == s[i].ini->e) {
+                    printf("Jugador 2 ha caído por una serpiente. Retrocederá a la posición %d\n", s[i].fin->e);
+                    nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
+                    break;
+                }
+            }
+            
+            J2 = nuevaPosicion; // Actualizar la posición del jugador 2 en el tablero
         }
     }
 
     // Mostrar el tablero actualizado
     MostrarTablero(tablero, e, s);
 }
+
 
 
 void Jugar(Lista* tablero, Move *e, Move *s){
