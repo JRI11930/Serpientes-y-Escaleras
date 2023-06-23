@@ -10,7 +10,9 @@
 */
 
 #include <math.h>
-#include <stdio.h>
+
+#include "libs/colas.h"
+#include "libs/pilas.h"
 #include "libs/listas.h"
 #include <math.h>
 #include <conio.h>
@@ -105,7 +107,6 @@ int main(){
 
     Inicio();
     Jugar(camino, e, s);
-    
 
     free(camino);
 
@@ -493,44 +494,27 @@ int TirarDados(){
 
 //Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
-void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
-    NodoL* nodo_actual;
-    int posicion_actual;
-    int posicion_nueva;
+void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]){
+    int posicionActual = 0;
+    int nuevaPosicion = 0;
 
-    // Obtener la posición actual del jugador
-    posicion_actual = Obtener(jugador, tablero);
-
-    // Calcular la nueva posición después de tirar los dados
-    posicion_nueva = posicion_actual + pasos;
-
-    // Verificar si la nueva posición es una escalera
-    for (int i = 0; i < 5; i++) {
-        if (e[i].ini->e == posicion_nueva) {
-            printf("El jugador %d sube por una escalera de %d a %d.\n", jugador, e[i].ini->e, e[i].fin->e);
-            posicion_nueva = e[i].fin->e;
-            break;
+    if (jugador == 1) {
+        posicionActual = J1;
+        nuevaPosicion = posicionActual + pasos;
+        if (nuevaPosicion <= 100) {
+            J1 = nuevaPosicion;
+        }
+    } else if (jugador == 2) {
+        posicionActual = J2;
+        nuevaPosicion = posicionActual + pasos;
+        if (nuevaPosicion <= 100) {
+            J2 = nuevaPosicion;
         }
     }
 
-    // Verificar si la nueva posición es una serpiente
-    for (int i = 0; i < 5; i++) {
-        if (s[i].ini->e == posicion_nueva) {
-            printf("El jugador %d baja por una serpiente de %d a %d.\n", jugador, s[i].ini->e, s[i].fin->e);
-            posicion_nueva = s[i].fin->e;
-            break;
-        }
-    }
-
-    // Actualizar la posición del jugador en el tablero
-    nodo_actual = tablero->head;
-    for (int i = 1; i <= posicion_nueva; i++) {
-        nodo_actual = nodo_actual->siguiente;
-    }
-    nodo_actual->e = jugador;
+    // Mostrar el tablero actualizado
+    MostrarTablero(tablero, e, s);
 }
-
-//Funcion que mueve al jugador en el tablero--------------------------------------------------------
 
 
 void Jugar(Lista* tablero, Move *e, Move *s){
@@ -591,5 +575,11 @@ void Inicio(){
     printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
     getche();
 
+
+}
+
+//Funcion que muestre el ganador
+
+void ganador(){
 
 }
