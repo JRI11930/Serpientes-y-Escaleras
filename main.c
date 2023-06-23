@@ -505,7 +505,7 @@ void Inicio(){
     printf("\n\t\t\t\t\t\t\t\tPi%ca del Valle Jos%c", 164, 130);
     printf("\n\t\t\t\t\t\t\t\tRam%crez Islas Jos%c Armando", 161, 130);
  
-    printf("\n\t\t\t\t\t\t\t\tMondrag%cn Aguilar Victor Hugo", 161, 130);
+    printf("\n\t\t\t\t\t\t\t\tMondrag%cn Aguilar Victor Hugo", 162);
 
     printf("\n\n\t\t\t\t\t\t\tPara comenzar, pulsa cualquier tecla...");
     getche();
