@@ -390,7 +390,7 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("\nJugador 1 ha ca%cdo por una serpiente. Retroceder%c a la posici%cn %d\n",162,160, 162, s[i].fin->e);
+                    printf("\nJugador 1 ha ca%cdo por una serpiente. Retroceder%c a la posici%cn %d\n",161,160, 162, s[i].fin->e);
                     system("pause");
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
@@ -412,7 +412,7 @@ void mover(int jugador, int pasos, Lista* tablero, Move e[], Move s[]) {
                     nuevaPosicion = e[i].fin->e; // Ajustar la posición a la posición de destino de la escalera
                     break;
                 } else if (nuevaPosicion == s[i].ini->e) {
-                    printf("\nJugador 2 ha ca%cdo por una serpiente. Retroceder%c a la posici%cn %d\n",162, 160, 162, s[i].fin->e);
+                    printf("\nJugador 2 ha ca%cdo por una serpiente. Retroceder%c a la posici%cn %d\n",161, 160, 162, s[i].fin->e);
                     system("pause");
                     nuevaPosicion = s[i].fin->e; // Ajustar la posición a la posición de destino de la serpiente
                     break;
